@@ -120,7 +120,7 @@ body {
   body footer {
     height: 520px;
     padding-top: 340px;
-    background: url(/img/waves.svg); }
+    background: url(../img/waves.svg); }
     body footer .copyright {
       padding-top: 120px;
       display: flex;
