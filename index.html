@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="css/styles.css">
-    <title>Document</title>
+    <title>FlyWeb - Recorre el mundo.</title>
 </head>
 <body>
     <header>
@@ -18,8 +18,9 @@
               </button>
               <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                  <a class="nav-link" href="#">Reserva</a>
-                  <a class="nav-link" href="#">Precios</a>
+                  <a class="nav-link" href="#_ready">Reserva</a>
+                  <a class="nav-link" href="#">Servicios</a>
+                  <a class="nav-link" href="#">Recorridos</a>
                 </div>
               </div>
             </div>
@@ -34,24 +35,23 @@
             </div>
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img src="img/carousel-1.jpg" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                  <h5>First slide label</h5>
-                  <p>Some representative placeholder content for the first slide.</p>
+                <img src="img/carousel-1.jpg" class="d-block w-100" alt="Mapa del mundo con avion">
+                <div class="carousel-caption d-md-block">
+                  <h1>¡El mundo es tuyo!</h1>
                 </div>
               </div>
               <div class="carousel-item">
-                <img src="img/carousel-2.jpg" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                  <h5>Second slide label</h5>
-                  <p>Some representative placeholder content for the second slide.</p>
+                <img src="img/carousel-2.jpg" class="d-block w-100" alt="Playa en el caribe">
+                <div class="carousel-caption d-md-block">
+                  <h2>¿Soñas con unas vacaciones inolvidables?</h2>
+                  <a href="#_ready" class="btn btn-dark btn-lg">Saca pasajes, ya!</a>
                 </div>
               </div>
               <div class="carousel-item">
-                <img src="img/carousel-3.jpg" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                  <h5>Third slide label</h5>
-                  <p>Some representative placeholder content for the third slide.</p>
+                <img src="img/carousel-3.jpg" class="d-block w-100" alt="Montañas en un atardecer">
+                <div class="carousel-caption d-md-block">
+                  <h2>Conoce nuestros destinos</h2>
+                  <a href="#_ready" class="btn btn-dark btn-lg">Mira nuestras propuestas</a>
                 </div>
               </div>
             </div>
@@ -64,28 +64,52 @@
               <span class="visually-hidden">Next</span>
             </button>
           </div>
-
+        <div class="mid_tittle" id="_ready">
+          <h2>Paga tu viaje en cuotas</h2>
+          <span><img class="card_logo" src="/img/Visa_Inc._logo.svg" alt="">12 cuotas sin interes</span>
+          <span><img class="card_logo" src="/img/Mastercard-logo.svg" alt="">9 cuotas sin interes</span>
+          <span><img class="card_logo" src="/img/American_Express_logo.svg" alt="">12 cuotas sin interes</span>
+        </div>
         <div class="form-container">
-            <form action="" id="form">
-                <h3>Login</h3>
+            <form action="#" id="form" method="POST">
+                <h3>¡Programa tu viaje!</h3>
                 <div class="container">
-                    <span class="icon"><i class="fasfa-user"></i></span>
-                    <input type="text" placeholder="Nombre de usuario">
+                  <label for="_dateDeparture">Fecha de partida</label>  
+                  <input type="date" id="_dateDeparture" >
                 </div>
                 <div class="container">
-                    <span class="icon"><i class="fasfa-at"></i></span>
-                    <input type="email" placeholder="e-mail">
+                  <label for="_dateReturn">Fecha de regreso</label>
+                  <input type="date" id="_dateReturn">
                 </div>
                 <div class="container">
-                    <span class="icon"><i class="fasfa-lock"></i></span>
-                    <input type="password" placeholder="password">
+                  <label for="_destinySelector">¿A donde queres ir?</label>
+                  <select name="destino" id="_destinySelector">
+                    <option value="SA">América del Sur</option>
+                    <option value="NA">América del Norte</option>
+                    <option value="EU">Europa</option>
+                    <option value="AF">Africa</option>
+                    <option value="AS">Asia</option>
+                    <option value="OC">Oceania</option>
+                  </select>
+                </div>
+                <div class="container">
+                  <label for="_passengerQuantity">¿Cuantos van a viajar?</label>
+                  <select name="pasajeros" id="_passengerQuantity">
+                    <option value="one">1</option>
+                    <option value="two">2</option>
+                    <option value="three">3</option>
+                    <option value="four">4</option>
+                  </select>
                 </div>
                 <input type="submit" value="login">
             </form>
         </div>
     </main>
     <footer>
-
+      <div class="copyright">
+        <span>FlyWeb ©</span>
+        <small>Copyright 2021 Matias Palladino. Todos los derechos reservados.</small>
+      </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <script src="js/scripts.js"></script>
