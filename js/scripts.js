@@ -76,6 +76,7 @@ const cuotas = (selector) =>{
             }else{
                 alert(`Su viaje en 12 cuotas con intereses a ${selectedDestinations} costara U$D ${fullprice} por mes. Viajaras por ${fullTravelData.ciudades} ciudades durante ${fullTravelData.tiempo} semanas.`)
             }
+            break;
         default:
             cuotas(parseInt(prompt("Por favor, DEBE seleccionar en cuantas cuotas desea abonar su viaje: 3 - 6 - 9 - 12")));
     }
