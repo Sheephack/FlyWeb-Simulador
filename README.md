@@ -3,7 +3,11 @@ Sitio Web realizado como simulador de web interactiva.
 
 Este sitio Web está siendo realizado como proyecto Final de JavaScript en CoderHouse, y está siendo actualizado con nuevas funcionalidades.
 
-## -- Versión 0.2 (Alpha) --
+## -- Versión 0.3 (Alpha) --
+Aplicación de Arrays y metodos relacionados.
+- Se agregan funciones que mejoran la usabilidad.
+
+### -- Versión 0.2 (Alpha) --
 Aplicación de funciones, y objetos relacionados.
 - Se agrega excepciones a .gitignore
 
