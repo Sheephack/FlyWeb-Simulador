@@ -16,7 +16,8 @@ body {
   body main {
     overflow: hidden;
     display: flex;
-    flex-direction: column; }
+    flex-direction: column;
+    align-items: center; }
     body main .carousel-caption {
       top: 40%; }
       body main .carousel-caption h1 {
@@ -51,6 +52,11 @@ body {
           width: auto; }
       body main .mid_tittle h2 {
         color: #fff; }
+      body main .mid_tittle .card_selected {
+        border-radius: 40%;
+        padding: 2px;
+        background-color: rgba(255, 157, 16, 0.6);
+        box-shadow: 0px 0px 30px 5px rgba(255, 157, 16, 0.9), inset 0px 0px 30px 1px rgba(255, 157, 16, 0.1); }
     body main .form-container {
       min-height: 100%;
       width: 100vw;
@@ -117,6 +123,22 @@ body {
         padding: 0.5px;
         font-size: 20px;
         color: #bbb; }
+    body main .fullTravelDataCard {
+      min-height: 100%;
+      width: auto;
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      text-align: center;
+      align-items: center;
+      border-radius: 5px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      border-top: 1px solid rgba(255, 255, 255, 0.3);
+      border-left: 1px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px); }
+      body main .fullTravelDataCard .card {
+        margin: 16px; }
   body footer {
     height: 520px;
     padding-top: 340px;
