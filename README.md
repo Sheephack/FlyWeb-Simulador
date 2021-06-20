@@ -3,7 +3,14 @@ Sitio Web realizado como simulador de web interactiva.
 
 Este sitio Web está siendo realizado como proyecto Final de JavaScript en CoderHouse, y está siendo actualizado con nuevas funcionalidades.
 
-## -- Versión 0.4 (Alpha) --
+## -- Versión 0.5 (Alpha) --
+Aplicación de Eventos de manipulación del DOM.
+- Se elimina por completo toda interacción del usuario mediante `prompt()` y `alert()`.
+- La funcionalidad es integramente mediante los elementos del DOM.
+- Se reordenan algunos elementos (aparece el carro de compras).
+- Se planifica una restructuración visual de todos los elementos para la preentrega del Proyecto Final. Solo cumple criterios de funcionamiento por el momento.
+
+### -- Versión 0.4 (Alpha) --
 Aplicación de manipulación del DOM.
 - La estetica final del sitio esta lejos de ser la final.
 

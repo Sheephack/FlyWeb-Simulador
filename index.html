@@ -71,19 +71,32 @@
           <span id="american_card"><img class="card_logo" src="img/American_Express_logo.svg" alt="">12 cuotas sin interes</span>
         </div>
         <div class="form-container">
-            <form action="#" id="form" method="POST">
+            <div id="form">
                 <h3>¡Programa tu viaje!</h3>
                 <div class="container">
-                  <label for="_dateDeparture">Fecha de partida</label>  
-                  <input type="date" id="_dateDeparture" >
+                  <label for="_quotaSelector">Cantidad de Cuotas</label>  
+                  <select name="quota" id="_quotaSelector">
+                    <option value="">Selecciona Cantidad de cuotas</option>
+                    <option value="3">3</option>
+                    <option value="6">6</option>
+                    <option value="9">9</option>
+                    <option value="12">12</option>
+                  </select>
                 </div>
                 <div class="container">
-                  <label for="_dateReturn">Fecha de regreso</label>
-                  <input type="date" id="_dateReturn">
+                  <label for="_cardSelector">Selecciona Tarjeta de Credito</label>
+                  <select name="card" id="_cardSelector">
+                    <option value="">Selecciona Tarjeta de Credito</option>
+                    <option value="Visa">Visa</option>
+                    <option value="Master">Mastercard</option>
+                    <option value="American">American Express</option>
+                    <option value="other">Otra</option>
+                  </select>
                 </div>
                 <div class="container">
                   <label for="_destinySelector">¿A donde queres ir?</label>
                   <select name="destino" id="_destinySelector">
+                    <option value="">Seleccione un destino</option>
                     <option value="SA">América del Sur</option>
                     <option value="NA">América del Norte</option>
                     <option value="EU">Europa</option>
@@ -91,20 +104,28 @@
                     <option value="AS">Asia</option>
                     <option value="OC">Oceania</option>
                   </select>
+                  <button class="btn btn-dark btn-sm" id="addDestiny">Agregar destino</button>
                 </div>
                 <div class="container">
                   <label for="_passengerQuantity">¿Cuantos van a viajar?</label>
                   <select name="pasajeros" id="_passengerQuantity">
+                    <option value="">Seleccione cantidad de pasajeros</option>
                     <option value="one">1</option>
                     <option value="two">2</option>
                     <option value="three">3</option>
                     <option value="four">4</option>
                   </select>
                 </div>
-                <input type="submit" value="login">
-            </form>
+                <button class="btn btn-dark" id="travelTrigger">Preparar Viaje</button>  
+              </div>
         </div>
+      <div class="showCaseOfDestinations nonVisibleDestinations" id="destinyShowcase">
+        
+      </div>  
     </main>
+    <aside class="market_bask non_visible" id="basket">
+      <h4>Carrito de compras</h4>
+    </aside>
     <footer>
       <div class="copyright">
         <span>FlyWeb ©</span>

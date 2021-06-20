@@ -64,7 +64,7 @@ body {
       align-items: center;
       justify-content: center;
       margin-top: 20px; }
-      body main .form-container form {
+      body main .form-container #form {
         display: flex;
         height: 250px;
         width: 1350px;
@@ -76,14 +76,14 @@ body {
         border-top: 1px solid rgba(255, 255, 255, 0.3);
         border-left: 1px solid rgba(255, 255, 255, 0.3);
         backdrop-filter: blur(10px); }
-        body main .form-container form label {
+        body main .form-container #form label {
           color: #FFF; }
-        body main .form-container form h3 {
+        body main .form-container #form h3 {
           font-size: 30px;
           padding: 30px 0;
           color: #ccc;
           letter-spacing: 3px; }
-        body main .form-container form input {
+        body main .form-container #form input {
           outline: none;
           border: none;
           height: 40px;
@@ -96,7 +96,7 @@ body {
           margin: 15px 0;
           letter-spacing: 1px;
           border-radius: 15px; }
-        body main .form-container form select {
+        body main .form-container #form select {
           outline: none;
           border: none;
           height: 40px;
@@ -109,23 +109,23 @@ body {
           margin: 15px 0;
           letter-spacing: 1px;
           border-radius: 15px; }
-          body main .form-container form select option {
+          body main .form-container #form select option {
             color: #000; }
-        body main .form-container form input[type="submit"] {
+        body main .form-container #form input[type="submit"] {
           width: 90%;
           cursor: pointer;
           background: linear-gradient(90deg, deeppink, blueviolet);
           margin-top: 30px;
           border-radius: 50px; }
-        body main .form-container form input[type="submit"]:hover {
+        body main .form-container #form button:hover {
           letter-spacing: 4px; }
       body main .form-container i {
         padding: 0.5px;
         font-size: 20px;
         color: #bbb; }
     body main .fullTravelDataCard {
-      min-height: 100%;
-      width: auto;
+      min-height: 50%;
+      width: 70%;
       display: flex;
       justify-content: center;
       margin-top: 20px;
@@ -139,6 +139,38 @@ body {
       backdrop-filter: blur(10px); }
       body main .fullTravelDataCard .card {
         margin: 16px; }
+    body main .showCaseOfDestinations {
+      min-height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
+      height: 250px;
+      width: 1350px;
+      background: rgba(255, 255, 255, 0.1);
+      text-align: center;
+      border-radius: 5px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      border-top: 1px solid rgba(255, 255, 255, 0.3);
+      border-left: 1px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px); }
+    body main .nonVisibleDestinations {
+      display: none; }
+  body .market_bask {
+    padding-top: 5rem;
+    background-color: rgba(115, 11, 175, 0.97);
+    height: 100vh;
+    width: 25vw;
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    align-self: start;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll; }
+  body .non_visible {
+    display: none; }
   body footer {
     height: 520px;
     padding-top: 340px;
@@ -151,3 +183,21 @@ body {
       justify-content: center;
       color: #000;
       text-align: center; }
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px; }
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px rgba(139, 2, 219, 0.493);
+  border-radius: 10px; }
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: rgba(115, 11, 175, 0.97); }
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #000; }
