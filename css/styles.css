@@ -18,6 +18,9 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center; }
+    body main .card {
+      min-width: 15rem;
+      width: 18rem; }
     body main .carousel-caption {
       top: 40%; }
       body main .carousel-caption h1 {
@@ -140,15 +143,15 @@ body {
       body main .fullTravelDataCard .card {
         margin: 16px; }
     body main .showCaseOfDestinations {
-      min-height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
       margin-top: 20px;
-      height: 250px;
-      width: 1350px;
+      height: auto;
+      width: auto;
       background: rgba(255, 255, 255, 0.1);
       text-align: center;
+      padding: 20px;
       border-radius: 5px;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
       border-top: 1px solid rgba(255, 255, 255, 0.3);
@@ -156,6 +159,21 @@ body {
       backdrop-filter: blur(10px); }
     body main .nonVisibleDestinations {
       display: none; }
+    body main #merchandising {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
+      height: auto;
+      width: auto;
+      background: rgba(255, 255, 255, 0.1);
+      text-align: center;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      border-top: 1px solid rgba(255, 255, 255, 0.3);
+      border-left: 1px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px); }
   body .market_bask {
     padding-top: 5rem;
     background-color: rgba(115, 11, 175, 0.97);

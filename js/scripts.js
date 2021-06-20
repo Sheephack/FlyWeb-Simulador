@@ -4,16 +4,23 @@ let noInterestTravel
 let masterYes = 0
 let visaYes = 0
 let americanYes = 0
+let destinationSpeach = ["Disfruta del hermoso recorrido por las ciudades de ", 
+                        "Pasea por las calles de ", 
+                        "El recorrido sera inolvidable, disfruta de ",
+                        "Nunca viviste nada igual, disfruta de un paseo por ",
+                        `La gente de este hermoso continente te hara disfrutar de `]
 
 
 // Constructor
 class Destino{
-    constructor (continent, price, time, citiesNumber, tax, passengers){
+    constructor (continent, price, time, citiesNumber, tax, image, citiesNames, passengers){
         this.continent = continent;
         this.price = parseFloat(price);
         this.time = time;
         this.citiesNumber = citiesNumber;
         this.tax = parseFloat(tax);
+        this.image = image;
+        this.citiesNames = citiesNames;
         this.passengers = passengers;
     }
     applyFullPricePerPassangerCount(){
@@ -22,12 +29,12 @@ class Destino{
 }
 //  array
 let destinations = [
-    europa = new Destino("Europa", 4500, 3, 15, 1.13), 
-    asia = new Destino("Asia", 5000, 4, 18, 1.14),
-    aDelNorte = new Destino("America del Norte", 4000, 4, 23, 1.26),
-    africa = new Destino("Africa", 2500, 5, 12, 1.1),
-    aDelSur = new Destino("America del Sur", 3000, 4, 15, 1.43),
-    oceania = new Destino("Oceania", 2000, 2, 6, 1.23)
+    europa = new Destino("Europa", 4500, 3, 14, 1.13, "europe.png", "Roma, Paris, Ámsterdam, Praga, Viena, Londres, Budapest, Berlín, Madrid, Atenas, Barcelona, Lisboa, Edimburgo y Bruselas"), 
+    asia = new Destino("Asia", 5000, 4, 13, 1.14, "asia.png", "Pekín, Shanghái, Bombay, Nueva Delhi, Seúl, Yakarta, Hong Kong, Bagdad, Tokio, Osaka, Moscú, Volgogrado y San Petersburgo"),
+    aDelNorte = new Destino("America del Norte", 4000, 4, 12, 1.26, "namerica.png", "Nueva York, Los Ángeles, Toronto, Washington D.C., Seattle, Las Vegas, Orlando, Miami, Ottawa, Vancouver, Ciudad de Mexico y Cancún "),
+    africa = new Destino("Africa", 2500, 5, 7, 1.1, "africa.png", "El Cairo, Johannesburgo, Nairobi, Ciudad del Cabo, Jerusalén, Abu Dabi y Dubái"),
+    aDelSur = new Destino("America del Sur", 3000, 4, 18, 1.43, "samerica.png", "Buenos Aires, San Carlos de Bariloche, Isla San Andres, Cordoba, La Habana, Río de Janeiro, Cartagena, Bogotá, Lima, Medellín, Montevideo, Quito, Cali, Brasilia, Asunción, Cusco, Manaos y Santiago de Chile"),
+    oceania = new Destino("Oceania", 2000, 2, 6, 1.23, "oceania.png", "Melbourne, Sídney, Perth, Auckland, Gladstone y Canberra")
 ]
 
 // Funciones
@@ -35,12 +42,12 @@ let destinations = [
 const resetDestinations = () =>{
     destinations = []
     destinations = [
-        europa = new Destino("Europa", 4500, 3, 15, 1.13), 
-        asia = new Destino("Asia", 5000, 4, 18, 1.14),
-        aDelNorte = new Destino("America del Norte", 4000, 4, 23, 1.26),
-        africa = new Destino("Africa", 2500, 5, 12, 1.1),
-        aDelSur = new Destino("America del Sur", 3000, 4, 15, 1.43),
-        oceania = new Destino("Oceania", 2000, 2, 6, 1.23)
+        europa = new Destino("Europa", 4500, 3, 14, 1.13, "europe.png", "Roma, Paris, Ámsterdam, Praga, Viena, Londres, Budapest, Berlín, Madrid, Atenas, Barcelona, Lisboa, Edimburgo y Bruselas"), 
+        asia = new Destino("Asia", 5000, 4, 13, 1.14, "asia.png", "Pekín, Shanghái, Bombay, Nueva Delhi, Seúl, Yakarta, Hong Kong, Bagdad, Tokio, Osaka, Moscú, Volgogrado y San Petersburgo"),
+        aDelNorte = new Destino("America del Norte", 4000, 4, 12, 1.26, "namerica.png", "Nueva York, Los Ángeles, Toronto, Washington D.C., Seattle, Las Vegas, Orlando, Miami, Ottawa, Vancouver, Ciudad de Mexico y Cancún "),
+        africa = new Destino("Africa", 2500, 5, 7, 1.1, "africa.png", "El Cairo, Johannesburgo, Nairobi, Ciudad del Cabo, Jerusalén, Abu Dabi y Dubái"),
+        aDelSur = new Destino("America del Sur", 3000, 4, 18, 1.43, "samerica.png", "Buenos Aires, San Carlos de Bariloche, Isla San Andres, Cordoba, La Habana, Río de Janeiro, Cartagena, Bogotá, Lima, Medellín, Montevideo, Quito, Cali, Brasilia, Asunción, Cusco, Manaos y Santiago de Chile"),
+        oceania = new Destino("Oceania", 2000, 2, 6, 1.23, "oceania.png", "Melbourne, Sídney, Perth, Auckland, Gladstone y Canberra")
     ]
 }
 
@@ -125,10 +132,20 @@ addDestinyButton.addEventListener("click", () => {
             break;
         }
     document.getElementById("destinyShowcase").classList.remove("nonVisibleDestinations");
-    showCase = document.createElement("ul");
+    showCase = document.createElement("div");
     showCase.id = "travelShowCase";
+    showCase.className = "card-group"
     for (destino of viaje){
-        showCase.innerHTML = `<li>${destino.continent}</li>`;
+        //Generador de numero random para seleccionar texto de arrays
+        let i = Math.floor(4*Math.random())
+        showCase.innerHTML = `<div class="card">
+                                <img src="img/${destino.image}" class="card-img-top" alt="Mapa de ${destino.continent}">
+                                <div class="card-body">
+                                <h5 class="card-title">${destino.continent}</h5>
+                                <p class="card-text">${destinationSpeach[i]} ${destino.citiesNames}</p>
+                                <p class="card-text"><small class="text-muted">Revise los requerimientos y restricciones aplicadas por la pandemia de COVID19 para cada destino.</small></p>
+                                </div>
+                            </div>`;
         document.getElementById("destinyShowcase").appendChild(showCase)
     }
 });
@@ -191,7 +208,7 @@ finishButton.addEventListener("click", () =>{
 
     let card = document.createElement("div");
     card.className = "fullTravelDataCard"
-    card.innerHTML = `<div class="card text-white bg-dark mb-3 border-light" id="cardOfTravel" style="width: 18rem;">
+    card.innerHTML = `<div class="card text-white bg-dark mb-3 border-light" id="cardOfTravel">
                         <img src="/img/plane_image.jpg" class="card-img-top" alt="Avion despegando">
                             <div class="card-body">
                                 <h5 class="card-title">¡Ya estamos casí listos!</h5>
@@ -214,12 +231,12 @@ finishButton.addEventListener("click", () =>{
     document.getElementById("cardOfTravel").appendChild(paymentMethodDisplay);
     if (noInterestTravel === true){
         let noInterestCard = document.createElement("li");
-        noInterestCard.className = "list-group list-group-flush";
+        noInterestCard.className = "list-group-item text-white bg-dark";
         noInterestCard.innerHTML = "Gracias a la tarjeta de credito seleccionada, las cuotas son SIN INTERES"
         document.getElementById("cardDetails").appendChild(noInterestCard)
     }else if (quotaSelected === 3){
         let noInterest = document.createElement("li");
-        noInterest.className = "list-group list-group-flush";
+        noInterest.className = "list-group-item text-white bg-dark";
         noInterest.innerHTML = "Los pagos en 3 cuotas son SIN INTERES"
         document.getElementById("cardDetails").appendChild(noInterest)
     }
@@ -254,8 +271,70 @@ finishButton.addEventListener("click", () =>{
             americanYes.classList.remove("card_selected");
         }
         resetDestinations()
-        document.getElementById("basket").classList.add("non_visible")     
+        document.getElementById("basket").classList.add("non_visible")   
+        document.getElementById("destinyShowcase").classList.add("nonVisibleDestinations")  
     })
     document.getElementById("cardOfTravel").appendChild(resetButton);
 
 });
+
+/// Area de Merchandising
+
+const productos = []
+
+class Producto{
+    constructor (id, name, precio, available, imageName){
+        this.id = id;
+        this.name = name;
+        this.precio = precio;
+        this.available = available;
+        this.imageName = imageName;
+    }
+};
+
+productos.push(new Producto(1, "Almohada", 200, true, "almohada.png"));
+productos.push(new Producto(2, "Cubre ojos", 150, true, "antifaz.png"));
+productos.push(new Producto(3, "Mapa marcable", 1400, false, "mapaRaspable.png"));
+productos.push(new Producto(4, "Vaso termico", 1200, true, "vasoTermico.png"));
+productos.push(new Producto(5, "Maqueta a escala", 2000, true, "avionAEscala.png"));
+productos.push(new Producto(6, "Lanyard", 125, true, "lanyard.png"));
+productos.push(new Producto(7, "Remera", 1300, true, "remera.png"));
+
+saleOfMerch = []
+
+for (producto of productos){
+    merch = document.createElement("div");
+    merch.className = "card"
+    merch.innerHTML = ` <img src="img/${producto.imageName}" class="card-img-top" alt="Foto de ${producto.name}">
+                        <div class="card-body">
+                        <h5 class="card-title">${producto.name}</h5>
+                        <p class="card-text">Aca va un texto random</p>
+                        <p class="card-text"><small class="text-muted">Costo: U$D${producto.precio}.</small></p>
+                        <button class="btn btn-dark product-add" id="${producto.id}">Añadir al carrito</button>`;
+    document.getElementById("merchandising").appendChild(merch)
+}
+
+// Codigo en contruccion, aun no le encuentro la vuelta a esta parte.
+
+// let merchAdd = document.getElementsByClassName("product-add")
+// Array.from(merchAdd).forEach(function(merchAdd){
+//     merchAdd.addEventListener("click", () =>{
+//     for (let id of merchAdd){
+//         console.log(id)
+//     }
+
+//     newProductAdded = document.createElement("div")
+//     newProductAdded.className = "card"
+//     newProductAdded.innerHTML = ` <img src="img/${producto.imageName}" class="card-img-top" alt="Foto de ${producto.name}">
+//                                 <div class="card-body">
+//                                 <h5 class="card-title">${producto.name}</h5>
+//                                 <p class="card-text">Aca va un texto random</p>
+//                                 <p class="card-text"><small class="text-muted">Costo: U$D${producto.precio}.</small></p>
+//                                 <button class="btn btn-dark product-add">Añadir al carrito</button>`;
+
+//     document.getElementById("basket").appendChild(newProductAdded);
+//     document.getElementById("basket").classList.remove("non_visible")
+    
+// })});
+
+// console.log(merchAdd)
