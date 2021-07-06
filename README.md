@@ -3,7 +3,10 @@ Sitio Web realizado como simulador de web interactiva.
 
 Este sitio Web está siendo realizado como proyecto Final de JavaScript en CoderHouse, y está siendo actualizado con nuevas funcionalidades.
 
-## -- Versión 0.6 (Alpha) --
+## -- Versión 0.7(Alpha) --
+Se aplican mejoras generales y el almacenamiento en localStorage.
+
+### -- Versión 0.6 (Alpha) --
 Aplicación de nuevos elementos de Merch, mejoras graficas en la elección de destinos.
 
 ### -- Versión 0.5 (Alpha) --

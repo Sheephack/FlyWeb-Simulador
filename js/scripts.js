@@ -91,6 +91,53 @@ const newPrice = (quota) =>{
     }
 }
 // Fin funciones
+// Boton de carrito
+
+let cartTrigger = document.getElementById("cartButton")
+let cart = document.getElementById("basket")
+cartTrigger.addEventListener("click", () => {
+    if (cart.style.display === "flex"){
+        cart.style.display = "none";
+    }else{
+        cart.style.display = "flex"
+}})
+
+
+// Chequea si quedo contenido en el carrito guardado de la sesion anterior en el localStorage y lo muestra en el carrito
+let arrowOfCart = document.getElementById("arrow-icon");
+if (localStorage.getItem("finalTravelData") !== null){
+    arrowOfCart.style.display = "block"
+    cart.style.display = "flex"
+    let previousTravelData = JSON.parse(localStorage.getItem("finalTravelData"))
+    let previousPassangerData = JSON.parse(localStorage.getItem("passengers"))
+    let previousDestinationsData = localStorage.getItem("destinyData")
+    stringfiedPreviousDestinations = previousDestinationsData
+    console.log(previousTravelData)
+    let card = document.createElement("div");
+    card.className = "fullTravelDataCard"
+    card.innerHTML = `<div class="card text-white bg-dark mb-3 border-light" id="cardOfTravel">
+                        <img src="/img/plane_image.jpg" class="card-img-top" alt="Avion despegando">
+                            <div class="card-body">
+                                <h5 class="card-title">¡Te quedo un viaje pendiente de la ultima vez que estuviste por aca!</h5>
+                                <p class="card-text">Aquí encontraras los detalles de tu viaje, chequealos antes de continuar.</p>
+                            </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item text-white bg-dark">Valor total: U$D ${previousTravelData.precio}</li>
+                            <li class="list-group-item text-white bg-dark">Ciudades recorridas: ${previousTravelData.ciudades}</li>
+                            <li class="list-group-item text-white bg-dark">Tiempo de viaje: ${previousTravelData.tiempo} semanas</li>
+                            <li class="list-group-item text-white bg-dark">Viajaras por: ${stringfiedPreviousDestinations}</li>
+                            <li class="list-group-item text-white bg-dark">Cantidad de pasajeros: ${previousPassangerData}</li>
+                        </ul>
+                     </div>`
+    document.getElementById("basket").appendChild(card);
+
+
+}else{
+    arrowOfCart.style.display = "none"
+}
+
+
+
 // Nuevo SISTEMA CON EL DOM, SIN PROMPT Y ALERT ABAJO DE ESTA LINEA:
 let added;
 
@@ -150,7 +197,7 @@ addDestinyButton.addEventListener("click", () => {
     }
 });
 
-
+//Inputs de seleccion del viaje
 let passengerCount;
 
 let selectedPassengers = document.getElementById("_passengerQuantity");
@@ -178,21 +225,25 @@ finishButton.addEventListener("click", () =>{
         case "one":
             for (const destinos of viaje){
                 destinos.passengers = 1;
+                localStorage.setItem("passengers", 1);
             }
             break;
         case "two":
             for (const destinos of viaje){
                 destinos.passengers = 2;
+                localStorage.setItem("passengers", 2);
             }
             break;
         case "three":
             for (const destinos of viaje){
                 destinos.passengers = 3;
+                localStorage.setItem("passengers", 3);
             }
             break;
         case "four":
             for (const destinos of viaje){
                 destinos.passengers = 4;
+                localStorage.setItem("passengers", 4);
             }
             break;
     }
@@ -200,12 +251,14 @@ finishButton.addEventListener("click", () =>{
     for (const travel of viaje){
         travel.applyFullPricePerPassangerCount();
     }
-
+//generacion del paquete de viaje
     fullTravelData = {precio: parseFloat(sumaValorPropiedades(viaje, 'price').toFixed(2)), ciudades: sumaValorPropiedades(viaje, 'citiesNumber'), tiempo: sumaValorPropiedades(viaje, 'time')};
     fullprice = newPrice(quotaSelected);
-
+    const dataInStorage = JSON.stringify(fullTravelData);
+    localStorage.setItem("finalTravelData", dataInStorage);
+    localStorage.setItem("destinyData", selectedDestinations)
     const stringOfDestinations = selectedDestinations.join(", ");
-
+//creacion de card en el carrito
     let card = document.createElement("div");
     card.className = "fullTravelDataCard"
     card.innerHTML = `<div class="card text-white bg-dark mb-3 border-light" id="cardOfTravel">
@@ -223,7 +276,9 @@ finishButton.addEventListener("click", () =>{
                         </ul>
                      </div>`
     document.getElementById("basket").appendChild(card);
-    document.getElementById("basket").classList.remove("non_visible")
+    //añade ayuda visual para ir al carrito
+    arrowOfCart.style.display = "block"
+    //añade informacion sobre el pago
     let paymentMethodDisplay = document.createElement("ul");
     paymentMethodDisplay.className = "list-group list-group-flush";
     paymentMethodDisplay.id = "cardDetails"
@@ -240,6 +295,7 @@ finishButton.addEventListener("click", () =>{
         noInterest.innerHTML = "Los pagos en 3 cuotas son SIN INTERES"
         document.getElementById("cardDetails").appendChild(noInterest)
     }
+    // funcionalidad del boton de reset
     let resetButton = document.createElement("button");
     resetButton.className = "btn btn-dark"
     resetButton.id = "_resetButton"
@@ -271,70 +327,72 @@ finishButton.addEventListener("click", () =>{
             americanYes.classList.remove("card_selected");
         }
         resetDestinations()
-        document.getElementById("basket").classList.add("non_visible")   
         document.getElementById("destinyShowcase").classList.add("nonVisibleDestinations")  
+        localStorage.clear()
+        arrowOfCart.style.display = "none"
     })
     document.getElementById("cardOfTravel").appendChild(resetButton);
-
 });
 
+
+// Codigo en contruccion, aun no le encuentro la vuelta a esta parte. La construire para la proxima entrega.
 /// Area de Merchandising
 
-const productos = []
+// const productos = []
 
-class Producto{
-    constructor (id, name, precio, available, imageName){
-        this.id = id;
-        this.name = name;
-        this.precio = precio;
-        this.available = available;
-        this.imageName = imageName;
-    }
-};
-
-productos.push(new Producto(1, "Almohada", 200, true, "almohada.png"));
-productos.push(new Producto(2, "Cubre ojos", 150, true, "antifaz.png"));
-productos.push(new Producto(3, "Mapa marcable", 1400, false, "mapaRaspable.png"));
-productos.push(new Producto(4, "Vaso termico", 1200, true, "vasoTermico.png"));
-productos.push(new Producto(5, "Maqueta a escala", 2000, true, "avionAEscala.png"));
-productos.push(new Producto(6, "Lanyard", 125, true, "lanyard.png"));
-productos.push(new Producto(7, "Remera", 1300, true, "remera.png"));
-
-saleOfMerch = []
-
-for (producto of productos){
-    merch = document.createElement("div");
-    merch.className = "card"
-    merch.innerHTML = ` <img src="img/${producto.imageName}" class="card-img-top" alt="Foto de ${producto.name}">
-                        <div class="card-body">
-                        <h5 class="card-title">${producto.name}</h5>
-                        <p class="card-text">Aca va un texto random</p>
-                        <p class="card-text"><small class="text-muted">Costo: U$D${producto.precio}.</small></p>
-                        <button class="btn btn-dark product-add" id="${producto.id}">Añadir al carrito</button>`;
-    document.getElementById("merchandising").appendChild(merch)
-}
-
-// Codigo en contruccion, aun no le encuentro la vuelta a esta parte.
-
-// let merchAdd = document.getElementsByClassName("product-add")
-// Array.from(merchAdd).forEach(function(merchAdd){
-//     merchAdd.addEventListener("click", () =>{
-//     for (let id of merchAdd){
-//         console.log(id)
+// class Producto{
+//     constructor (id, name, precio, available, imageName){
+//         this.id = id;
+//         this.name = name;
+//         this.precio = precio;
+//         this.available = available;
+//         this.imageName = imageName;
 //     }
+// };
 
-//     newProductAdded = document.createElement("div")
-//     newProductAdded.className = "card"
-//     newProductAdded.innerHTML = ` <img src="img/${producto.imageName}" class="card-img-top" alt="Foto de ${producto.name}">
-//                                 <div class="card-body">
-//                                 <h5 class="card-title">${producto.name}</h5>
-//                                 <p class="card-text">Aca va un texto random</p>
-//                                 <p class="card-text"><small class="text-muted">Costo: U$D${producto.precio}.</small></p>
-//                                 <button class="btn btn-dark product-add">Añadir al carrito</button>`;
+// productos.push(new Producto(1, "Almohada", 200, true, "almohada.png"));
+// productos.push(new Producto(2, "Cubre ojos", 150, true, "antifaz.png"));
+// productos.push(new Producto(3, "Mapa marcable", 1400, false, "mapaRaspable.png"));
+// productos.push(new Producto(4, "Vaso termico", 1200, true, "vasoTermico.png"));
+// productos.push(new Producto(5, "Maqueta a escala", 2000, true, "avionAEscala.png"));
+// productos.push(new Producto(6, "Lanyard", 125, true, "lanyard.png"));
+// productos.push(new Producto(7, "Remera", 1300, true, "remera.png"));
 
-//     document.getElementById("basket").appendChild(newProductAdded);
-//     document.getElementById("basket").classList.remove("non_visible")
+// saleOfMerch = []
+
+// for (producto of productos){
+//     merch = document.createElement("div");
+//     merch.className = "card"
+//     merch.innerHTML = ` <img src="img/${producto.imageName}" class="card-img-top" alt="Foto de ${producto.name}">
+//                         <div class="card-body">
+//                         <h5 class="card-title">${producto.name}</h5>
+//                         <p class="card-text">Aca va un texto random</p>
+//                         <p class="card-text"><small class="text-muted">Costo: U$D${producto.precio}.</small></p>
+//                         <button class="btn btn-dark product-add" id="${producto.id}">Añadir al carrito</button>`;
+//     document.getElementById("merchandising").appendChild(merch)
+// }
+
+
+
+// // let merchAdd = document.getElementsByClassName("product-add")
+// // Array.from(merchAdd).forEach(function(merchAdd){
+// //     merchAdd.addEventListener("click", () =>{
+// //     for (let id of merchAdd){
+// //         console.log(id)
+// //     }
+
+// //     newProductAdded = document.createElement("div")
+// //     newProductAdded.className = "card"
+// //     newProductAdded.innerHTML = ` <img src="img/${producto.imageName}" class="card-img-top" alt="Foto de ${producto.name}">
+// //                                 <div class="card-body">
+// //                                 <h5 class="card-title">${producto.name}</h5>
+// //                                 <p class="card-text">Aca va un texto random</p>
+// //                                 <p class="card-text"><small class="text-muted">Costo: U$D${producto.precio}.</small></p>
+// //                                 <button class="btn btn-dark product-add">Añadir al carrito</button>`;
+
+// //     document.getElementById("basket").appendChild(newProductAdded);
+// //     document.getElementById("basket").classList.remove("non_visible")
     
-// })});
+// // })});
 
-// console.log(merchAdd)
+// // console.log(merchAdd)
