@@ -93,47 +93,42 @@ const newPrice = (quota) =>{
 // Fin funciones
 // Boton de carrito
 
-let cartTrigger = document.getElementById("cartButton")
+
 let cart = document.getElementById("basket")
-cartTrigger.addEventListener("click", () => {
+$("#cartButton").click(() => {
     if (cart.style.display === "flex"){
-        cart.style.display = "none";
+        $("#basket").hide();
     }else{
-        cart.style.display = "flex"
+        $("#basket").css('display', 'flex')
 }})
 
 
 // Chequea si quedo contenido en el carrito guardado de la sesion anterior en el localStorage y lo muestra en el carrito
-let arrowOfCart = document.getElementById("arrow-icon");
 if (localStorage.getItem("finalTravelData") !== null){
-    arrowOfCart.style.display = "block"
-    cart.style.display = "flex"
+    $("#arrow-icon").show()
+    $("#basket").css('display', 'flex')
     let previousTravelData = JSON.parse(localStorage.getItem("finalTravelData"))
     let previousPassangerData = JSON.parse(localStorage.getItem("passengers"))
     let previousDestinationsData = localStorage.getItem("destinyData")
     stringfiedPreviousDestinations = previousDestinationsData
     console.log(previousTravelData)
-    let card = document.createElement("div");
-    card.className = "fullTravelDataCard"
-    card.innerHTML = `<div class="card text-white bg-dark mb-3 border-light" id="cardOfTravel">
-                        <img src="/img/plane_image.jpg" class="card-img-top" alt="Avion despegando">
-                            <div class="card-body">
-                                <h5 class="card-title">¡Te quedo un viaje pendiente de la ultima vez que estuviste por aca!</h5>
-                                <p class="card-text">Aquí encontraras los detalles de tu viaje, chequealos antes de continuar.</p>
-                            </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item text-white bg-dark">Valor total: U$D ${previousTravelData.precio}</li>
-                            <li class="list-group-item text-white bg-dark">Ciudades recorridas: ${previousTravelData.ciudades}</li>
-                            <li class="list-group-item text-white bg-dark">Tiempo de viaje: ${previousTravelData.tiempo} semanas</li>
-                            <li class="list-group-item text-white bg-dark">Viajaras por: ${stringfiedPreviousDestinations}</li>
-                            <li class="list-group-item text-white bg-dark">Cantidad de pasajeros: ${previousPassangerData}</li>
-                        </ul>
-                     </div>`
-    document.getElementById("basket").appendChild(card);
-
+    $("#basket").append(`<div class="fullTravelDataCard"><div class="card text-white bg-dark mb-3 border-light" id="cardOfTravel">
+    <img src="/img/plane_image.jpg" class="card-img-top" alt="Avion despegando">
+        <div class="card-body">
+            <h5 class="card-title">¡Te quedo un viaje pendiente de la ultima vez que estuviste por aca!</h5>
+            <p class="card-text">Aquí encontraras los detalles de tu viaje, chequealos antes de continuar.</p>
+        </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item text-white bg-dark">Valor total: U$D ${previousTravelData.precio}</li>
+        <li class="list-group-item text-white bg-dark">Ciudades recorridas: ${previousTravelData.ciudades}</li>
+        <li class="list-group-item text-white bg-dark">Tiempo de viaje: ${previousTravelData.tiempo} semanas</li>
+        <li class="list-group-item text-white bg-dark">Viajaras por: ${stringfiedPreviousDestinations}</li>
+        <li class="list-group-item text-white bg-dark">Cantidad de pasajeros: ${previousPassangerData}</li>
+    </ul>
+ </div></div>`);
 
 }else{
-    arrowOfCart.style.display = "none"
+    $("#arrow-icon").hide()
 }
 
 
@@ -141,17 +136,15 @@ if (localStorage.getItem("finalTravelData") !== null){
 // Nuevo SISTEMA CON EL DOM, SIN PROMPT Y ALERT ABAJO DE ESTA LINEA:
 let added;
 
-let selectedContinent = document.getElementById("_destinySelector");
-selectedContinent.addEventListener("change", () => {
-    added = document.getElementById("_destinySelector").value 
+$("#_destinySelector").change((e) => {
+    added = e.target.value 
 });
 
 
 let showCaseContainer
-
-let addDestinyButton = document.getElementById("addDestiny");
 let showCase
-addDestinyButton.addEventListener("click", () => {
+
+$("#addDestiny").click(() => {
     switch(added){
         case "EU":
             viaje.push(destinations[0]);
@@ -200,27 +193,23 @@ addDestinyButton.addEventListener("click", () => {
 //Inputs de seleccion del viaje
 let passengerCount;
 
-let selectedPassengers = document.getElementById("_passengerQuantity");
-selectedPassengers.addEventListener("change", () => {
-    passengerCount = document.getElementById("_passengerQuantity").value
+$("#_passengerQuantity").change((e) => {
+    passengerCount = e.target.value
 })
 
 let quotaSelected
 
-let selectedQuota = document.getElementById("_quotaSelector");
-selectedQuota.addEventListener("change", () => {
-    quotaSelected = parseInt(document.getElementById("_quotaSelector").value)
+$("#_quotaSelector").change((e) => {
+    quotaSelected = parseInt(e.target.value)
 })
 
 let cardValidation
 
-let selectedCard = document.getElementById("_cardSelector");
-selectedCard.addEventListener("change", () => {
-    cardValidation = document.getElementById("_cardSelector").value 
+$("#_cardSelector").change((e) => {
+    cardValidation = e.target.value 
 });
 
-let finishButton = document.getElementById("travelTrigger");
-finishButton.addEventListener("click", () =>{
+$("#travelTrigger").click(() =>{
     switch(passengerCount){
         case "one":
             for (const destinos of viaje){
@@ -259,57 +248,40 @@ finishButton.addEventListener("click", () =>{
     localStorage.setItem("destinyData", selectedDestinations)
     const stringOfDestinations = selectedDestinations.join(", ");
 //creacion de card en el carrito
-    let card = document.createElement("div");
-    card.className = "fullTravelDataCard"
-    card.innerHTML = `<div class="card text-white bg-dark mb-3 border-light" id="cardOfTravel">
-                        <img src="/img/plane_image.jpg" class="card-img-top" alt="Avion despegando">
-                            <div class="card-body">
-                                <h5 class="card-title">¡Ya estamos casí listos!</h5>
-                                <p class="card-text">Aquí encontraras los detalles de tu viaje, chequealos antes de continuar.</p>
-                            </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item text-white bg-dark">Valor total: U$D ${fullTravelData.precio}</li>
-                            <li class="list-group-item text-white bg-dark">Ciudades recorridas: ${fullTravelData.ciudades}</li>
-                            <li class="list-group-item text-white bg-dark">Tiempo de viaje: ${fullTravelData.tiempo} semanas</li>
-                            <li class="list-group-item text-white bg-dark">Viajaras por: ${stringOfDestinations}</li>
-                            <li class="list-group-item text-white bg-dark">Cantidad de pasajeros: ${viaje[0].passengers}</li>
-                        </ul>
-                     </div>`
-    document.getElementById("basket").appendChild(card);
+    $('#basket').append(`<div class="fullTravelDataCard"><div class="card text-white bg-dark mb-3 border-light" id="cardOfTravel">
+    <img src="/img/plane_image.jpg" class="card-img-top" alt="Avion despegando">
+        <div class="card-body">
+            <h5 class="card-title">¡Ya estamos casí listos!</h5>
+            <p class="card-text">Aquí encontraras los detalles de tu viaje, chequealos antes de continuar.</p>
+        </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item text-white bg-dark">Valor total: U$D ${fullTravelData.precio}</li>
+        <li class="list-group-item text-white bg-dark">Ciudades recorridas: ${fullTravelData.ciudades}</li>
+        <li class="list-group-item text-white bg-dark">Tiempo de viaje: ${fullTravelData.tiempo} semanas</li>
+        <li class="list-group-item text-white bg-dark">Viajaras por: ${stringOfDestinations}</li>
+        <li class="list-group-item text-white bg-dark">Cantidad de pasajeros: ${viaje[0].passengers}</li>
+    </ul>
+ </div></div>`)
+    
     //añade ayuda visual para ir al carrito
-    arrowOfCart.style.display = "block"
+    $("#arrow-icon").show()
     //añade informacion sobre el pago
-    let paymentMethodDisplay = document.createElement("ul");
-    paymentMethodDisplay.className = "list-group list-group-flush";
-    paymentMethodDisplay.id = "cardDetails"
-    paymentMethodDisplay.innerHTML = `<li class="list-group-item text-white bg-dark">A pagar en ${quotaSelected} cuotas.</li>`
-    document.getElementById("cardOfTravel").appendChild(paymentMethodDisplay);
+    $("#cardOfTravel").append(`<ul class="list-group list-group-flush" id="cardDetails"><li class="list-group-item text-white bg-dark">A pagar en ${quotaSelected} cuotas.</li></ul>`);
     if (noInterestTravel === true){
-        let noInterestCard = document.createElement("li");
-        noInterestCard.className = "list-group-item text-white bg-dark";
-        noInterestCard.innerHTML = "Gracias a la tarjeta de credito seleccionada, las cuotas son SIN INTERES"
-        document.getElementById("cardDetails").appendChild(noInterestCard)
+        $("#cardDetails").append('<li class="list-group-item text-white bg-dark">Gracias a la tarjeta de credito seleccionada, las cuotas son SIN INTERES</li>');
     }else if (quotaSelected === 3){
-        let noInterest = document.createElement("li");
-        noInterest.className = "list-group-item text-white bg-dark";
-        noInterest.innerHTML = "Los pagos en 3 cuotas son SIN INTERES"
-        document.getElementById("cardDetails").appendChild(noInterest)
+        $("#cardDetails").append('<li class="list-group-item text-white bg-dark">Los pagos en 3 cuotas son SIN INTERES</li>');
     }
     // funcionalidad del boton de reset
-    let resetButton = document.createElement("button");
-    resetButton.className = "btn btn-dark"
-    resetButton.id = "_resetButton"
-    resetButton.innerHTML = "Volver a comenzar"
-    resetButton.addEventListener("click", () =>{
+    $("#cardOfTravel").append('<button class="btn btn-dark" id="_resetButton">Volver a comenzar</button>').click(() =>{
         for (every of viaje){
-        deleteShowCase = document.getElementById("travelShowCase");
-        deleteShowCase.parentNode.removeChild(deleteShowCase)
+        $("#travelShowCase").remove();
         }
         fullprice = 0
         selectedDestinations.length = 0;
         fullTravelData = 0;
         noInterestTravel = false;
-        card.parentNode.removeChild(card); 
+        $(".fullTravelDataCard").remove();
         card = 0;
         showCase = 0;
         added = 0
@@ -329,9 +301,8 @@ finishButton.addEventListener("click", () =>{
         resetDestinations()
         document.getElementById("destinyShowcase").classList.add("nonVisibleDestinations")  
         localStorage.clear()
-        arrowOfCart.style.display = "none"
+        $("#arrow-icon").hide()
     })
-    document.getElementById("cardOfTravel").appendChild(resetButton);
 });
 
 
