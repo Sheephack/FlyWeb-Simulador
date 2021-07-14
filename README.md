@@ -2,7 +2,18 @@
 Sitio Web realizado como simulador de web interactiva.
 
 Este sitio Web está siendo realizado como proyecto Final de JavaScript en CoderHouse, y está siendo actualizado con nuevas funcionalidades.
-## -- Versión 0.8(Alpha) --
+
+## -- Versión 1.0(Beta) --
+Se modifica ligeramente los estilos para una presentación mas adecuada y se estructura la funcionalidad casi total del sitio.
+- Las `cards` ya son nuevamente visualmente coherentes con los contenedores.
+- Se añaden mas animaciones para una navegación mas fluida y no tan abrupta.
+- Se reemplaza el botón de "Comenzar de nuevo" de la card del viaje completo por el botón "Vaciar Carrito".
+- Incorporación de llamada AJAX Asincrónica a array de objetos JSON para el botón del nav-bar "Recorridos"
+
+### -- Versión 0.9(Alpha) --
+Se añade animación concatenada en carrito.
+
+### -- Versión 0.8(Alpha) --
 Acercandose a versión Beta. Se añade uso de JQuery en selectores y eventos, ligeros usos de efectos.
 
 ### -- Versión 0.7(Alpha) --

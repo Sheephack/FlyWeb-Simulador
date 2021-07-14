@@ -1,0 +1,59 @@
+[
+    {
+        "continent":"Europa",
+        "price": "4500",
+        "time": "3",
+        "citiesNumber": "14",
+        "tax": "1.13",
+        "image": "europe.png",
+        "citiesNames": "Roma, Paris, Ámsterdam, Praga, Viena, Londres, Budapest, Berlín, Madrid, Atenas, Barcelona, Lisboa, Edimburgo y Bruselas" 
+    },
+    {
+        "continent":"Asia", 
+        "price":"5000", 
+        "time":"4", 
+        "citiesNumber":"13", 
+        "tax":"1.14", 
+        "image":"asia.png", 
+        "citiesNames":"Pekín, Shanghái, Bombay, Nueva Delhi, Seúl, Yakarta, Hong Kong, Bagdad, Tokio, Osaka, Moscú, Volgogrado y San Petersburgo"
+    },
+    {
+        "continent":"America del Norte", 
+        "price":"4000", 
+        "time":"4", 
+        "citiesNumber":"12", 
+        "tax":"1.26", 
+        "image":"namerica.png", 
+        "citiesNames":"Nueva York, Los Ángeles, Toronto, Washington D.C., Seattle, Las Vegas, Orlando, Miami, Ottawa, Vancouver, Ciudad de Mexico y Cancún "
+    },
+    {
+        "continent":"Africa", 
+        "price":"2500", 
+        "time":"5", 
+        "citiesNumber":"7", 
+        "tax":"1.1", 
+        "image":"africa.png", 
+        "citiesNames":"El Cairo, Johannesburgo, Nairobi, Ciudad del Cabo, Jerusalén, Abu Dabi y Dubái"
+    },
+    {
+        "continent":"America del Sur", 
+        "price":"3000", 
+        "time":"4", 
+        "citiesNumber":"18", 
+        "tax":"1.43", 
+        "image":"samerica.png", 
+        "citiesNames":"Buenos Aires, San Carlos de Bariloche, Isla San Andres, Cordoba, La Habana, Río de Janeiro, Cartagena, Bogotá, Lima, Medellín, Montevideo, Quito, Cali, Brasilia, Asunción, Cusco, Manaos y Santiago de Chile"
+    },
+    {
+        "continent":"Oceania", 
+        "price":"2000", 
+        "time":"2", 
+        "citiesNumber":"6", 
+        "tax":"1.23", 
+        "image":"oceania.png", 
+        "citiesNames":"Melbourne, Sídney, Perth, Auckland, Gladstone y Canberra"
+    }
+
+
+
+]

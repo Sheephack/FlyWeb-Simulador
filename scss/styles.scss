@@ -1,3 +1,8 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
 
 body{
     background-color: #000000;
@@ -120,9 +125,22 @@ body{
                     color: #FFF;
                 }
 
+                #labelForDestiny{
+                    display: flex;
+                    flex-direction: column;
+                    #select_destiny{
+                        display: flex;
+                        
+                    }
+                    #addDestiny{
+                        margin: 10px;
+                    }
+                }
+                
+
                 h3{
                     font-size: 30px;
-                    padding: 30px 0;
+                    padding: 30px;
                     color: #ccc;
                     letter-spacing: 3px;
                 }
@@ -171,7 +189,12 @@ body{
                 }
 
                 button:hover{
-                    letter-spacing: 4px;
+                    background-color: white;
+                    color: #000;
+                }
+
+                #travelTrigger{
+                    margin: 10px;
                 }
             }
 
@@ -200,10 +223,10 @@ body{
             .card{
                 margin: 16px;
             }
+            
         }
         .showCaseOfDestinations{
             display: flex;
-            align-items: center;
             justify-content: center;
             margin-top: 20px;
             height: auto;
@@ -253,11 +276,41 @@ body{
         flex-direction: column;
         align-items: center;
         overflow-y: scroll;
+
+        #basket_tittle{
+            color: white;
+        }
         
+        #resetButton2{
+            display: none;
+            margin: 10px;
+        }
+        .fullTravelDataCard{
+            min-height: 50%;
+            width: 90%;
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+            background: rgba(0, 0, 0, 0.356);
+            text-align: center;
+            align-items: center;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,.3);
+            border-top: 1px solid rgba(255,255,255,.3);
+            border-left: 1px solid rgba(255,255,255,.3);
+            backdrop-filter: blur(10px);
+        }
+
+        #cardOfTravel{
+            margin: 30px;
+        }
 
     }
 
     .non_visible{
+        display: none;
+    }
+    #availableDestinys{
         display: none;
     }
 
@@ -272,7 +325,7 @@ body{
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            color: #000;
+            color: #FFF;
             text-align: center;
         }
     }

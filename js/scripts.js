@@ -27,7 +27,28 @@ class Destino{
         this.price = this.price * this.tax * 1.21 * this.passengers;
     }
 }
-//  array
+//Llamada AJAX a JSON Local
+const jsonLocal = "./json/data.json";
+$.getJSON(jsonLocal, function(data, status){
+    let infoOfJSON = data
+    console.log(infoOfJSON)
+    if (status === "success"){
+        $("#toggleAvailable").click (() =>{
+            for (destiny of infoOfJSON){
+                $("#availableDestinys").fadeIn(3000).css('display', 'flex').append(`<div class="card col-sm-6"> <img src="img/${destiny.image}" class="card-img-top" alt="Foto de ${destiny.continent}">
+                <div class="card-body">
+                <h5 class="card-title">Destino: ${destiny.continent}</h5>
+                <p class="card-text">Las ciudades a visitar: ${destiny.citiesNames}</p></div>
+                <div class="card-footer"><small class="text-muted">El costo de este paquete es de: U$D${destiny.price} por persona. El destino tiene un impuesto del ${destiny.tax}%</small></div>
+                `)
+            }
+        })
+    }
+})
+
+
+
+ //array
 let destinations = [
     europa = new Destino("Europa", 4500, 3, 14, 1.13, "europe.png", "Roma, Paris, Ámsterdam, Praga, Viena, Londres, Budapest, Berlín, Madrid, Atenas, Barcelona, Lisboa, Edimburgo y Bruselas"), 
     asia = new Destino("Asia", 5000, 4, 13, 1.14, "asia.png", "Pekín, Shanghái, Bombay, Nueva Delhi, Seúl, Yakarta, Hong Kong, Bagdad, Tokio, Osaka, Moscú, Volgogrado y San Petersburgo"),
@@ -92,21 +113,28 @@ const newPrice = (quota) =>{
 }
 // Fin funciones
 // Boton de carrito
-
+// Animacion concatenada!
 
 let cart = document.getElementById("basket")
 $("#cartButton").click(() => {
     if (cart.style.display === "flex"){
-        $("#basket").hide();
+        $("#resetButton2").fadeOut("fast").animate({height:'-=3', width:'-=3'}, 1000, "linear", function (){ $("#arrow-icon").fadeIn("slow")})
+        $("#basket").fadeOut("3000");
     }else{
-        $("#basket").css('display', 'flex')
-}})
+        $("#basket").fadeIn("3000").css('display', 'flex')
+        $("#resetButton2").fadeIn(1000).animate({height:'+=3', width:'+=3'}, 2000, "linear", function (){ $("#arrow-icon").fadeOut("slow")})
+    
+            
+    }
+
+    ;})
 
 
 // Chequea si quedo contenido en el carrito guardado de la sesion anterior en el localStorage y lo muestra en el carrito
 if (localStorage.getItem("finalTravelData") !== null){
     $("#arrow-icon").show()
     $("#basket").css('display', 'flex')
+    $("#resetButton2").show().css('display', 'flex')
     let previousTravelData = JSON.parse(localStorage.getItem("finalTravelData"))
     let previousPassangerData = JSON.parse(localStorage.getItem("passengers"))
     let previousDestinationsData = localStorage.getItem("destinyData")
@@ -131,7 +159,39 @@ if (localStorage.getItem("finalTravelData") !== null){
     $("#arrow-icon").hide()
 }
 
-
+//El vaciar carrito elimina tanto del carrito como del LocalStorage los elementos
+$("#resetButton2").click(() =>{
+    for (every of viaje){
+        $("#travelShowCase").remove();
+        }
+        fullprice = 0
+        selectedDestinations.length = 0;
+        fullTravelData = 0;
+        noInterestTravel = false;
+        $(".fullTravelDataCard").remove();
+        card = 0;
+        showCase = 0;
+        added = 0
+        passengerCount = 0
+        quotaSelected = 0
+        cardValidation = 0
+        viaje.length = 0;
+        if (masterYes != 0){
+            masterYes.classList.remove("card_selected");
+        }
+        if (visaYes != 0){
+            visaYes.classList.remove("card_selected");
+        }
+        if (americanYes != 0){
+            americanYes.classList.remove("card_selected");
+        }
+        resetDestinations()
+        document.getElementById("destinyShowcase").classList.add("nonVisibleDestinations")  
+        localStorage.clear()
+        $("#arrow-icon").hide()
+        $("#destinyShowcase").hide()
+    }
+)
 
 // Nuevo SISTEMA CON EL DOM, SIN PROMPT Y ALERT ABAJO DE ESTA LINEA:
 let added;
@@ -171,7 +231,7 @@ $("#addDestiny").click(() => {
             selectedDestinations.push("Oceania")
             break;
         }
-    document.getElementById("destinyShowcase").classList.remove("nonVisibleDestinations");
+    $("#destinyShowcase").fadeIn(2000).css('display', 'flex');
     showCase = document.createElement("div");
     showCase.id = "travelShowCase";
     showCase.className = "card-group"
@@ -273,36 +333,36 @@ $("#travelTrigger").click(() =>{
         $("#cardDetails").append('<li class="list-group-item text-white bg-dark">Los pagos en 3 cuotas son SIN INTERES</li>');
     }
     // funcionalidad del boton de reset
-    $("#cardOfTravel").append('<button class="btn btn-dark" id="_resetButton">Volver a comenzar</button>').click(() =>{
-        for (every of viaje){
-        $("#travelShowCase").remove();
-        }
-        fullprice = 0
-        selectedDestinations.length = 0;
-        fullTravelData = 0;
-        noInterestTravel = false;
-        $(".fullTravelDataCard").remove();
-        card = 0;
-        showCase = 0;
-        added = 0
-        passengerCount = 0
-        quotaSelected = 0
-        cardValidation = 0
-        viaje.length = 0;
-        if (masterYes != 0){
-            masterYes.classList.remove("card_selected");
-        }
-        if (visaYes != 0){
-            visaYes.classList.remove("card_selected");
-        }
-        if (americanYes != 0){
-            americanYes.classList.remove("card_selected");
-        }
-        resetDestinations()
-        document.getElementById("destinyShowcase").classList.add("nonVisibleDestinations")  
-        localStorage.clear()
-        $("#arrow-icon").hide()
-    })
+    // $("#cardOfTravel").append('<button class="btn btn-dark" id="_resetButton">Volver a comenzar</button>').click(() =>{
+    //     for (every of viaje){
+    //     $("#travelShowCase").remove();
+    //     }
+    //     fullprice = 0
+    //     selectedDestinations.length = 0;
+    //     fullTravelData = 0;
+    //     noInterestTravel = false;
+    //     $(".fullTravelDataCard").remove();
+    //     card = 0;
+    //     showCase = 0;
+    //     added = 0
+    //     passengerCount = 0
+    //     quotaSelected = 0
+    //     cardValidation = 0
+    //     viaje.length = 0;
+    //     if (masterYes != 0){
+    //         masterYes.classList.remove("card_selected");
+    //     }
+    //     if (visaYes != 0){
+    //         visaYes.classList.remove("card_selected");
+    //     }
+    //     if (americanYes != 0){
+    //         americanYes.classList.remove("card_selected");
+    //     }
+    //     resetDestinations()
+    //     document.getElementById("destinyShowcase").classList.add("nonVisibleDestinations")  
+    //     localStorage.clear()
+    //     $("#arrow-icon").hide()
+    // })
 });
 
 
@@ -345,25 +405,25 @@ $("#travelTrigger").click(() =>{
 
 
 
-// // let merchAdd = document.getElementsByClassName("product-add")
-// // Array.from(merchAdd).forEach(function(merchAdd){
-// //     merchAdd.addEventListener("click", () =>{
-// //     for (let id of merchAdd){
-// //         console.log(id)
-// //     }
+// let merchAdd = document.getElementsByClassName("product-add")
+// Array.from(merchAdd).forEach(function(merchAdd){
+//     merchAdd.addEventListener("click", () =>{
+//     for (let id of merchAdd){
+//         console.log(id)
+//     }
 
-// //     newProductAdded = document.createElement("div")
-// //     newProductAdded.className = "card"
-// //     newProductAdded.innerHTML = ` <img src="img/${producto.imageName}" class="card-img-top" alt="Foto de ${producto.name}">
-// //                                 <div class="card-body">
-// //                                 <h5 class="card-title">${producto.name}</h5>
-// //                                 <p class="card-text">Aca va un texto random</p>
-// //                                 <p class="card-text"><small class="text-muted">Costo: U$D${producto.precio}.</small></p>
-// //                                 <button class="btn btn-dark product-add">Añadir al carrito</button>`;
+//     newProductAdded = document.createElement("div")
+//     newProductAdded.className = "card"
+//     newProductAdded.innerHTML = ` <img src="img/${producto.imageName}" class="card-img-top" alt="Foto de ${producto.name}">
+//                                 <div class="card-body">
+//                                 <h5 class="card-title">${producto.name}</h5>
+//                                 <p class="card-text">Aca va un texto random</p>
+//                                 <p class="card-text"><small class="text-muted">Costo: U$D${producto.precio}.</small></p>
+//                                 <button class="btn btn-dark product-add">Añadir al carrito</button>`;
 
-// //     document.getElementById("basket").appendChild(newProductAdded);
-// //     document.getElementById("basket").classList.remove("non_visible")
+//     document.getElementById("basket").appendChild(newProductAdded);
+//     document.getElementById("basket").classList.remove("non_visible")
     
-// // })});
+// })});
 
-// // console.log(merchAdd)
+// console.log(merchAdd)
