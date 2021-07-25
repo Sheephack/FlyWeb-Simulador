@@ -3,7 +3,21 @@ Sitio Web realizado como simulador de web interactiva.
 
 Este sitio Web está siendo realizado como proyecto Final de JavaScript en CoderHouse, y está siendo actualizado con nuevas funcionalidades.
 
-## -- Versión 1.0(Beta) --
+## -- Versión 1.1(Alpha / Release) --
+Se realiza entrega de proyecto final.
+- Se elimina la, nunca agregada, seccion Servicios. En su lugar se reemplaza por Merchandising.
+- Se añade la funcionalidad de shop de merchandising, con diversos items para el viaje.
+- Se separa en dos la funcionalidad de JS.
+- Se añade la posibilidad de eliminar items individuales del carrito.
+- Se incorpora llamada AJAX del merch.
+- Se hace uso de Sweet Alerts para diversas acciones que requieren la llamada de atencion del usuario.
+    - Se avisa al agregar items al carrito y cuando el viaje se programa.
+    - Evita el uso de Confirmar compra cuando no hay nada en el carrito.
+    - Confirma la compra de los items en el carrito.
+- Se puede confirmar la compra cuando un viaje queda pendiente de una sesion anterior.
+- Se hacen arreglos generales de estilos en sectores donde visualmente el sitio se rompia.
+
+### -- Versión 1.0(Beta) --
 Se modifica ligeramente los estilos para una presentación mas adecuada y se estructura la funcionalidad casi total del sitio.
 - Las `cards` ya son nuevamente visualmente coherentes con los contenedores.
 - Se añaden mas animaciones para una navegación mas fluida y no tan abrupta.

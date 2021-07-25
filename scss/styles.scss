@@ -99,7 +99,7 @@ body{
             }
         }
 
-        .form-container{
+        #form-container{
             min-height: 100%;
             width: 100vw;
             display: flex;
@@ -205,8 +205,9 @@ body{
             }
         }
 
+        
+
         .fullTravelDataCard{
-            min-height: 50%;
             width: 70%;
             display: flex;
             justify-content: center;
@@ -245,8 +246,7 @@ body{
         }
 
         #merchandising{
-            display: flex;
-            align-items: center;
+            display: none;
             justify-content: center;
             margin-top: 20px;
             height: auto;
@@ -259,6 +259,8 @@ body{
             border-top: 1px solid rgba(255,255,255,.3);
             border-left: 1px solid rgba(255,255,255,.3);
             backdrop-filter: blur(10px);
+
+            
         }
     }
 
@@ -281,12 +283,14 @@ body{
             color: white;
         }
         
-        #resetButton2{
-            display: none;
-            margin: 10px;
+        #resetButton{
+            margin: 5px;
+        }
+
+        #travelSection{
+            display: contents;
         }
         .fullTravelDataCard{
-            min-height: 50%;
             width: 90%;
             display: flex;
             justify-content: center;
@@ -303,6 +307,28 @@ body{
 
         #cardOfTravel{
             margin: 30px;
+        }
+        #confirmBuy{
+            margin: 5px;
+        }
+        #merchSection{
+            width: 90%;
+            display: none;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 10px;
+            background: rgba(0, 0, 0, 0.356);
+            text-align: center;
+            align-items: center;
+            border-radius: 5px;
+            padding: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,.3);
+            border-top: 1px solid rgba(255,255,255,.3);
+            border-left: 1px solid rgba(255,255,255,.3);
+            backdrop-filter: blur(10px);
+        }
+        .flexedMerch{
+            min-width: 200px;
         }
 
     }
@@ -431,3 +457,7 @@ body{
     }
   
   }
+.colored-toast.swal2-icon-success {
+    background-color: #a5dc86 !important;
+}
+  

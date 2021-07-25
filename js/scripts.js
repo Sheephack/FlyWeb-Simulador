@@ -4,12 +4,30 @@ let noInterestTravel
 let masterYes = 0
 let visaYes = 0
 let americanYes = 0
+let fullTravelData
 let destinationSpeach = ["Disfruta del hermoso recorrido por las ciudades de ", 
                         "Pasea por las calles de ", 
                         "El recorrido sera inolvidable, disfruta de ",
                         "Nunca viviste nada igual, disfruta de un paseo por ",
                         `La gente de este hermoso continente te hara disfrutar de `]
+let productsPurchased = []
 
+// Mixin de Toast
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    iconColor: 'white',
+    customClass: {
+        popup: 'colored-toast'
+    },
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
 
 // Constructor
 class Destino{
@@ -31,9 +49,8 @@ class Destino{
 const jsonLocal = "./json/data.json";
 $.getJSON(jsonLocal, function(data, status){
     let infoOfJSON = data
-    console.log(infoOfJSON)
     if (status === "success"){
-        $("#toggleAvailable").click (() =>{
+        $("#toggleAvailable").one ("click", () =>{
             for (destiny of infoOfJSON){
                 $("#availableDestinys").fadeIn(3000).css('display', 'flex').append(`<div class="card col-sm-6"> <img src="img/${destiny.image}" class="card-img-top" alt="Foto de ${destiny.continent}">
                 <div class="card-body">
@@ -111,24 +128,29 @@ const newPrice = (quota) =>{
         }
     }
 }
-// Fin funciones
 // Boton de carrito
 // Animacion concatenada!
 
 let cart = document.getElementById("basket")
 $("#cartButton").click(() => {
-    if (cart.style.display === "flex"){
-        $("#resetButton2").fadeOut("fast").animate({height:'-=3', width:'-=3'}, 1000, "linear", function (){ $("#arrow-icon").fadeIn("slow")})
+    if (cart.style.display === "flex" && localStorage.getItem("finalTravelData") == undefined){
+        $("#resetButton").fadeOut("fast")
         $("#basket").fadeOut("3000");
-    }else{
+    }
+    else if (cart.style.display === "flex" && localStorage.getItem("finalTravelData") != undefined){
+        $("#resetButton").fadeOut("fast")
+        $("#arrow-icon").fadeIn("slow")
+        $("#basket").fadeOut("3000");
+        
+    }else {
         $("#basket").fadeIn("3000").css('display', 'flex')
-        $("#resetButton2").fadeIn(1000).animate({height:'+=3', width:'+=3'}, 2000, "linear", function (){ $("#arrow-icon").fadeOut("slow")})
+        $("#resetButton").fadeIn(1000)
+        $("#arrow-icon").fadeOut("slow")
     
             
     }
 
     ;})
-
 
 // Chequea si quedo contenido en el carrito guardado de la sesion anterior en el localStorage y lo muestra en el carrito
 if (localStorage.getItem("finalTravelData") !== null){
@@ -140,7 +162,7 @@ if (localStorage.getItem("finalTravelData") !== null){
     let previousDestinationsData = localStorage.getItem("destinyData")
     stringfiedPreviousDestinations = previousDestinationsData
     console.log(previousTravelData)
-    $("#basket").append(`<div class="fullTravelDataCard"><div class="card text-white bg-dark mb-3 border-light" id="cardOfTravel">
+    $("#travelSection").append(`<div class="fullTravelDataCard"><div class="card text-white bg-dark mb-3 border-light" id="cardOfTravel">
     <img src="/img/plane_image.jpg" class="card-img-top" alt="Avion despegando">
         <div class="card-body">
             <h5 class="card-title">¡Te quedo un viaje pendiente de la ultima vez que estuviste por aca!</h5>
@@ -159,37 +181,62 @@ if (localStorage.getItem("finalTravelData") !== null){
     $("#arrow-icon").hide()
 }
 
-//El vaciar carrito elimina tanto del carrito como del LocalStorage los elementos
-$("#resetButton2").click(() =>{
-    for (every of viaje){
-        $("#travelShowCase").remove();
+//El vaciar carrito elimina tanto del carrito como del LocalStorage los elementos, luego de confirmar la compra se ejecuta la misma funcion para resetear el simulador
+let resetFunction = () =>{
+    $("#resetButton").fadeOut("fast")
+            $("#basket").fadeOut("3000");
+          for (every of viaje){
+            $("#travelShowCase").remove();
+            }
+            fullprice = 0
+            selectedDestinations.length = 0;
+            fullTravelData = 0;
+            noInterestTravel = false;
+            $(".fullTravelDataCard").remove();
+            card = 0;
+            showCase = 0;
+            added = 0
+            passengerCount = 0
+            quotaSelected = 0
+            cardValidation = 0
+            viaje.length = 0;
+            if (masterYes != 0){
+                masterYes.classList.remove("card_selected");
+            }
+            if (visaYes != 0){
+                visaYes.classList.remove("card_selected");
+            }
+            if (americanYes != 0){
+                americanYes.classList.remove("card_selected");
+            }
+            resetDestinations();
+            document.getElementById("destinyShowcase").classList.add("nonVisibleDestinations")  ;
+            localStorage.clear();
+            $("#arrow-icon").hide();
+            $("#destinyShowcase").hide();
+            productsPurchased = [];
+            $("#merchSection").empty().hide()
+}
+$("#resetButton").click(() =>{
+    Swal.fire({
+        title: '¿Desea vaciar el carrito?',
+        text: "La compra comenzara desde un principio y no se guardaran cambios",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#8403FC',
+        cancelButtonColor: '#212529',
+        confirmButtonText: 'Si, vaciar carrito',
+        cancelButtonText: 'Cancelar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Hecho',
+            'El carrito esta ahora vacio.',
+            'success'
+          )
+            resetFunction()
         }
-        fullprice = 0
-        selectedDestinations.length = 0;
-        fullTravelData = 0;
-        noInterestTravel = false;
-        $(".fullTravelDataCard").remove();
-        card = 0;
-        showCase = 0;
-        added = 0
-        passengerCount = 0
-        quotaSelected = 0
-        cardValidation = 0
-        viaje.length = 0;
-        if (masterYes != 0){
-            masterYes.classList.remove("card_selected");
-        }
-        if (visaYes != 0){
-            visaYes.classList.remove("card_selected");
-        }
-        if (americanYes != 0){
-            americanYes.classList.remove("card_selected");
-        }
-        resetDestinations()
-        document.getElementById("destinyShowcase").classList.add("nonVisibleDestinations")  
-        localStorage.clear()
-        $("#arrow-icon").hide()
-        $("#destinyShowcase").hide()
+      })
     }
 )
 
@@ -200,11 +247,12 @@ $("#_destinySelector").change((e) => {
     added = e.target.value 
 });
 
-
 let showCaseContainer
 let showCase
 
-$("#addDestiny").click(() => {
+//Añadir destinos
+$("#addDestiny").click((e) => {
+    e.preventDefault()
     switch(added){
         case "EU":
             viaje.push(destinations[0]);
@@ -236,7 +284,7 @@ $("#addDestiny").click(() => {
     showCase.id = "travelShowCase";
     showCase.className = "card-group"
     for (destino of viaje){
-        //Generador de numero random para seleccionar texto de arrays
+        //Generador de numero random para seleccionar texto de arrays y muestra cada destino agregado
         let i = Math.floor(4*Math.random())
         showCase.innerHTML = `<div class="card">
                                 <img src="img/${destino.image}" class="card-img-top" alt="Mapa de ${destino.continent}">
@@ -268,8 +316,9 @@ let cardValidation
 $("#_cardSelector").change((e) => {
     cardValidation = e.target.value 
 });
-
-$("#travelTrigger").click(() =>{
+// travelTrigger comienza la generacion del paquete de viaje mediante los imputs del formulario
+$("#travelTrigger").click((e) =>{
+    e.preventDefault()
     switch(passengerCount){
         case "one":
             for (const destinos of viaje){
@@ -296,7 +345,6 @@ $("#travelTrigger").click(() =>{
             }
             break;
     }
-
     for (const travel of viaje){
         travel.applyFullPricePerPassangerCount();
     }
@@ -308,7 +356,7 @@ $("#travelTrigger").click(() =>{
     localStorage.setItem("destinyData", selectedDestinations)
     const stringOfDestinations = selectedDestinations.join(", ");
 //creacion de card en el carrito
-    $('#basket').append(`<div class="fullTravelDataCard"><div class="card text-white bg-dark mb-3 border-light" id="cardOfTravel">
+    $('#travelSection').append(`<div class="fullTravelDataCard"><div class="card text-white bg-dark mb-3 border-light" id="cardOfTravel">
     <img src="/img/plane_image.jpg" class="card-img-top" alt="Avion despegando">
         <div class="card-body">
             <h5 class="card-title">¡Ya estamos casí listos!</h5>
@@ -332,98 +380,56 @@ $("#travelTrigger").click(() =>{
     }else if (quotaSelected === 3){
         $("#cardDetails").append('<li class="list-group-item text-white bg-dark">Los pagos en 3 cuotas son SIN INTERES</li>');
     }
-    // funcionalidad del boton de reset
-    // $("#cardOfTravel").append('<button class="btn btn-dark" id="_resetButton">Volver a comenzar</button>').click(() =>{
-    //     for (every of viaje){
-    //     $("#travelShowCase").remove();
-    //     }
-    //     fullprice = 0
-    //     selectedDestinations.length = 0;
-    //     fullTravelData = 0;
-    //     noInterestTravel = false;
-    //     $(".fullTravelDataCard").remove();
-    //     card = 0;
-    //     showCase = 0;
-    //     added = 0
-    //     passengerCount = 0
-    //     quotaSelected = 0
-    //     cardValidation = 0
-    //     viaje.length = 0;
-    //     if (masterYes != 0){
-    //         masterYes.classList.remove("card_selected");
-    //     }
-    //     if (visaYes != 0){
-    //         visaYes.classList.remove("card_selected");
-    //     }
-    //     if (americanYes != 0){
-    //         americanYes.classList.remove("card_selected");
-    //     }
-    //     resetDestinations()
-    //     document.getElementById("destinyShowcase").classList.add("nonVisibleDestinations")  
-    //     localStorage.clear()
-    //     $("#arrow-icon").hide()
-    // })
+    document.getElementById("form-container").reset()  
+    Toast.fire({ //uso de SweetAlerts para ayuda visual
+        icon: 'success',
+        title: 'Viaje agregado al carrito!'
+    })
 });
+// Boton de confirmacion de compra
+$("#confirmBuy").click( () =>{
+    if ((localStorage.getItem("finalTravelData") != undefined) || (productsPurchased.length > 0)){
+    Swal.fire({
+        title: 'Deseas confirmar tu compra?',
+        text: "Tu viaje y/o los productos seleccionados estan por ser confirmados",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, confirmar!',
+        cancelButtonText: 'Seguir navegando'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            const reducer = (accumulator, currentValue) => accumulator + currentValue;
+            finalPriceCalc = () =>{ //la calculadora consulta el localstorage por la posibilidad de viaje en sesion anterior y hace un reduce del array de productos seleccionados.
+                if ((localStorage.getItem("finalTravelData") != undefined) && (productsPurchased.length > 0)){
+                    previousPriceRequierement = JSON.parse(localStorage.getItem("finalTravelData"))
+                return productsPurchased.reduce(reducer) + previousPriceRequierement.precio
+            }else if (localStorage.getItem("finalTravelData") != undefined){
+                previousPriceRequierement = JSON.parse(localStorage.getItem("finalTravelData"))
+                return previousPriceRequierement.precio
+            }else{
+                return productsPurchased.reduce(reducer)
+            }
+            }
+            finalPrice = finalPriceCalc()
+          Swal.fire(
+            'Tu compra ha sido confirmada!',
+            `El costo final sera de U$D ${finalPrice} A disfrutar!`,
+            'success'
+          )
+        }
+        resetFunction();
+      })
+    }else{
+        Swal.fire(
+            'No hay nada que puedas confirmar!',
+            'Añade items al carrito para continuar',
+            'error'
+          )
+    }
+})
 
 
-// Codigo en contruccion, aun no le encuentro la vuelta a esta parte. La construire para la proxima entrega.
-/// Area de Merchandising
-
-// const productos = []
-
-// class Producto{
-//     constructor (id, name, precio, available, imageName){
-//         this.id = id;
-//         this.name = name;
-//         this.precio = precio;
-//         this.available = available;
-//         this.imageName = imageName;
-//     }
-// };
-
-// productos.push(new Producto(1, "Almohada", 200, true, "almohada.png"));
-// productos.push(new Producto(2, "Cubre ojos", 150, true, "antifaz.png"));
-// productos.push(new Producto(3, "Mapa marcable", 1400, false, "mapaRaspable.png"));
-// productos.push(new Producto(4, "Vaso termico", 1200, true, "vasoTermico.png"));
-// productos.push(new Producto(5, "Maqueta a escala", 2000, true, "avionAEscala.png"));
-// productos.push(new Producto(6, "Lanyard", 125, true, "lanyard.png"));
-// productos.push(new Producto(7, "Remera", 1300, true, "remera.png"));
-
-// saleOfMerch = []
-
-// for (producto of productos){
-//     merch = document.createElement("div");
-//     merch.className = "card"
-//     merch.innerHTML = ` <img src="img/${producto.imageName}" class="card-img-top" alt="Foto de ${producto.name}">
-//                         <div class="card-body">
-//                         <h5 class="card-title">${producto.name}</h5>
-//                         <p class="card-text">Aca va un texto random</p>
-//                         <p class="card-text"><small class="text-muted">Costo: U$D${producto.precio}.</small></p>
-//                         <button class="btn btn-dark product-add" id="${producto.id}">Añadir al carrito</button>`;
-//     document.getElementById("merchandising").appendChild(merch)
-// }
 
 
-
-// let merchAdd = document.getElementsByClassName("product-add")
-// Array.from(merchAdd).forEach(function(merchAdd){
-//     merchAdd.addEventListener("click", () =>{
-//     for (let id of merchAdd){
-//         console.log(id)
-//     }
-
-//     newProductAdded = document.createElement("div")
-//     newProductAdded.className = "card"
-//     newProductAdded.innerHTML = ` <img src="img/${producto.imageName}" class="card-img-top" alt="Foto de ${producto.name}">
-//                                 <div class="card-body">
-//                                 <h5 class="card-title">${producto.name}</h5>
-//                                 <p class="card-text">Aca va un texto random</p>
-//                                 <p class="card-text"><small class="text-muted">Costo: U$D${producto.precio}.</small></p>
-//                                 <button class="btn btn-dark product-add">Añadir al carrito</button>`;
-
-//     document.getElementById("basket").appendChild(newProductAdded);
-//     document.getElementById("basket").classList.remove("non_visible")
-    
-// })});
-
-// console.log(merchAdd)

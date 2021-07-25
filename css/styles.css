@@ -64,14 +64,14 @@ body {
         padding: 2px;
         background-color: rgba(255, 157, 16, 0.6);
         box-shadow: 0px 0px 30px 5px rgba(255, 157, 16, 0.9), inset 0px 0px 30px 1px rgba(255, 157, 16, 0.1); }
-    body main .form-container {
+    body main #form-container {
       min-height: 100%;
       width: 100vw;
       display: flex;
       align-items: center;
       justify-content: center;
       margin-top: 20px; }
-      body main .form-container #form {
+      body main #form-container #form {
         display: flex;
         height: 250px;
         width: 1350px;
@@ -83,21 +83,21 @@ body {
         border-top: 1px solid rgba(255, 255, 255, 0.3);
         border-left: 1px solid rgba(255, 255, 255, 0.3);
         backdrop-filter: blur(10px); }
-        body main .form-container #form label {
+        body main #form-container #form label {
           color: #FFF; }
-        body main .form-container #form #labelForDestiny {
+        body main #form-container #form #labelForDestiny {
           display: flex;
           flex-direction: column; }
-          body main .form-container #form #labelForDestiny #select_destiny {
+          body main #form-container #form #labelForDestiny #select_destiny {
             display: flex; }
-          body main .form-container #form #labelForDestiny #addDestiny {
+          body main #form-container #form #labelForDestiny #addDestiny {
             margin: 10px; }
-        body main .form-container #form h3 {
+        body main #form-container #form h3 {
           font-size: 30px;
           padding: 30px;
           color: #ccc;
           letter-spacing: 3px; }
-        body main .form-container #form input {
+        body main #form-container #form input {
           outline: none;
           border: none;
           height: 40px;
@@ -110,7 +110,7 @@ body {
           margin: 15px 0;
           letter-spacing: 1px;
           border-radius: 15px; }
-        body main .form-container #form select {
+        body main #form-container #form select {
           outline: none;
           border: none;
           height: 40px;
@@ -123,25 +123,24 @@ body {
           margin: 15px 0;
           letter-spacing: 1px;
           border-radius: 15px; }
-          body main .form-container #form select option {
+          body main #form-container #form select option {
             color: #000; }
-        body main .form-container #form input[type="submit"] {
+        body main #form-container #form input[type="submit"] {
           width: 90%;
           cursor: pointer;
           background: linear-gradient(90deg, deeppink, blueviolet);
           margin-top: 30px;
           border-radius: 50px; }
-        body main .form-container #form button:hover {
+        body main #form-container #form button:hover {
           background-color: white;
           color: #000; }
-        body main .form-container #form #travelTrigger {
+        body main #form-container #form #travelTrigger {
           margin: 10px; }
-      body main .form-container i {
+      body main #form-container i {
         padding: 0.5px;
         font-size: 20px;
         color: #bbb; }
     body main .fullTravelDataCard {
-      min-height: 50%;
       width: 70%;
       display: flex;
       justify-content: center;
@@ -173,8 +172,7 @@ body {
     body main .nonVisibleDestinations {
       display: none; }
     body main #merchandising {
-      display: flex;
-      align-items: center;
+      display: none;
       justify-content: center;
       margin-top: 20px;
       height: auto;
@@ -203,11 +201,11 @@ body {
     overflow-y: scroll; }
     body .market_bask #basket_tittle {
       color: white; }
-    body .market_bask #resetButton2 {
-      display: none;
-      margin: 10px; }
+    body .market_bask #resetButton {
+      margin: 5px; }
+    body .market_bask #travelSection {
+      display: contents; }
     body .market_bask .fullTravelDataCard {
-      min-height: 50%;
       width: 90%;
       display: flex;
       justify-content: center;
@@ -222,6 +220,25 @@ body {
       backdrop-filter: blur(10px); }
     body .market_bask #cardOfTravel {
       margin: 30px; }
+    body .market_bask #confirmBuy {
+      margin: 5px; }
+    body .market_bask #merchSection {
+      width: 90%;
+      display: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 10px;
+      background: rgba(0, 0, 0, 0.356);
+      text-align: center;
+      align-items: center;
+      border-radius: 5px;
+      padding: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      border-top: 1px solid rgba(255, 255, 255, 0.3);
+      border-left: 1px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px); }
+    body .market_bask .flexedMerch {
+      min-width: 200px; }
   body .non_visible {
     display: none; }
   body #availableDestinys {
@@ -320,3 +337,6 @@ body {
 .open .right-bar:after {
   transform-origin: center center;
   transform: rotate(70deg); }
+
+.colored-toast.swal2-icon-success {
+  background-color: #a5dc86 !important; }

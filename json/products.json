@@ -1,0 +1,51 @@
+[
+    {
+    "id": 1,
+    "name": "Almohada", 
+    "price": 200, 
+    "imageName":"almohada.png",
+    "text": "Almohada de viaje para evitar contracturas en el asiento del avion"
+},
+{
+    "id": 2,
+    "name": "Cubre ojos",
+    "price": 150,
+    "imageName": "antifaz.png",
+    "text": "Cubre ojos para poder dormir durante viajes de dia"
+},
+{
+    "id": 3,
+    "name": "Mapa marcable",
+    "price": 400,
+    "imageName": "mapaRaspable.png",
+    "text": "Mapa para raspar cada uno de los destinos visitados"
+},
+{
+    "id": 4,
+    "name": "Vaso termico",
+    "price": 300,
+    "imageName": "vasoTermico.png",
+    "text": "Vaso termico de 500ml de capacidad y con conservacion de liquidos calientes de hasta 24hs"
+},
+{
+    "id": 5,
+    "name": "Maqueta a escala", 
+    "price": 1000,
+    "imageName": "avionAEscala.png",
+    "text": "Replica de Boeing 747 a escala para armar"
+},
+{
+    "id": 6,
+    "name": "Lanyard",
+    "price": 5,
+    "imageName": "lanyard.png",
+    "text": "Colgante de FlyWeb"
+},
+{
+    "id": 7,
+    "name": "Remera",
+    "price": 100,
+    "imageName": "remera.png",
+    "text": "Remera de FlyWeb"
+}
+]
