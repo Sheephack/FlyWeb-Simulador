@@ -357,7 +357,7 @@ $("#travelTrigger").click((e) =>{
     const stringOfDestinations = selectedDestinations.join(", ");
 //creacion de card en el carrito
     $('#travelSection').append(`<div class="fullTravelDataCard"><div class="card text-white bg-dark mb-3 border-light" id="cardOfTravel">
-    <img src="/img/plane_image.jpg" class="card-img-top" alt="Avion despegando">
+    <img src="./img/plane_image.jpg" class="card-img-top" alt="Avion despegando">
         <div class="card-body">
             <h5 class="card-title">¡Ya estamos casí listos!</h5>
             <p class="card-text">Aquí encontraras los detalles de tu viaje, chequealos antes de continuar.</p>
