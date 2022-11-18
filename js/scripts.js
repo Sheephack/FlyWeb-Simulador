@@ -163,7 +163,7 @@ if (localStorage.getItem("finalTravelData") !== null){
     stringfiedPreviousDestinations = previousDestinationsData
     console.log(previousTravelData)
     $("#travelSection").append(`<div class="fullTravelDataCard"><div class="card text-white bg-dark mb-3 border-light" id="cardOfTravel">
-    <img src="/img/plane_image.jpg" class="card-img-top" alt="Avion despegando">
+    <img src="./img/plane_image.jpg" class="card-img-top" alt="Avion despegando">
         <div class="card-body">
             <h5 class="card-title">¡Te quedo un viaje pendiente de la ultima vez que estuviste por aca!</h5>
             <p class="card-text">Aquí encontraras los detalles de tu viaje, chequealos antes de continuar.</p>
